@@ -1,28 +1,23 @@
 #!/bin/bash
 
-export QT_GRAPHICSSYSTEM=native
-export QT_X11_NO_MITSHM=1
+# curl -s https://mikrotik.com/download/winbox | grep WinBox_Linux.zip | tail -n1
+version=${1:-"4.0beta47"}
+here=$(dirname "$(realpath $0)")
 
-XSOCK=/tmp/.X11-unix
-XAUTH=/tmp/.docker.xauth
+docker buildx build --platform linux/amd64 \
+             --build-arg HOST_UID=$(id -u) \
+             --build-arg HOST_GID=$(id -g) \
+             --build-arg VERSION=$version \
+             --tag "winbox:$version" \
+             --tag 'winbox:latest' \
+             $here
 
-HERE=$(dirname "$(realpath $0)")
-$HERE/build.sh
 # preserve settings between runs
-mkdir -p "$HERE/.wine"
-
-xhost +local:docker
-
-xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+mkdir -p "$HOME/.local/share/MikroTik/WinBox"
 
 docker run --rm -it \
            --user $UID:$UID \
            --network host \
            --env DISPLAY=$DISPLAY \
-           --env XAUTHORITY=$XAUTH \
-           --volume $XSOCK:$XSOCK \
-           --volume $XAUTH:$XAUTH \
-           --volume $HERE/.wine:/home/ubuntu/.wine \
+           --volume $HOME/.local/share/MikroTik/WinBox:/home/nonroot/.local/share/MikroTik/WinBox \
            winbox:latest
-
-xhost -local:docker
