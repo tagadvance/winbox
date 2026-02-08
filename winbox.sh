@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # curl -s https://mikrotik.com/download/winbox | grep WinBox_Linux.zip | tail -n1
-version=${1:-"4.0beta47"}
+version=${1:-"4.0rc1"}
 here=$(dirname "$(realpath $0)")
 
 docker buildx build --platform linux/amd64 \

@@ -4,7 +4,7 @@ WinBox is one of the last hold out applications in my transition to 100% Linux. 
 
 ## Update 2026-02-01
 
-Switched from WinBox v3.43 to v4.0beta47. This removes the need for wine.
+Switched from WinBox v3.43 to v4.0rc1. This removes the need for wine.
 
 # Example Usage:
 ```
