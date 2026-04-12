@@ -4,8 +4,8 @@ ARG HOST_UID
 ARG HOST_GID
 ARG VERSION
 
-RUN groupadd --gid ${HOST_GID:-1000} nonroot \
-    && useradd --uid ${HOST_UID:-1000} --gid ${HOST_GID:-1000} --create-home nonroot \
+RUN groupadd --gid ${HOST_GID:-1000} winbox \
+    && useradd --uid ${HOST_UID:-1000} --gid ${HOST_GID:-1000} --create-home winbox \
     && apt update \
     && apt install -y libxcb-image0 libgl1 libegl1 libfreetype6 libfontconfig1 libxkbcommon0 \
                       libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-render-util0 \
@@ -18,6 +18,6 @@ RUN groupadd --gid ${HOST_GID:-1000} nonroot \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-USER nonroot
+USER winbox
 
 ENTRYPOINT ["/opt/winbox/WinBox"]
