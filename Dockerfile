@@ -4,6 +4,13 @@ ARG HOST_UID
 ARG HOST_GID
 ARG VERSION
 
+LABEL org.opencontainers.image.title="WinBox"
+LABEL org.opencontainers.image.description="Unofficial WinBox"
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL org.opencontainers.image.source="https://github.com/tagadvance/winbox"
+LABEL org.opencontainers.image.vendor="https://github.com/tagadvance"
+LABEL org.opencontainers.image.licenses="https://mikrotik.com/software/legal"
+
 RUN groupadd --gid ${HOST_GID:-1000} winbox \
     && useradd --uid ${HOST_UID:-1000} --gid ${HOST_GID:-1000} --create-home winbox \
     && apt update \
