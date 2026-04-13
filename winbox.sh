@@ -10,5 +10,6 @@ docker run --rm -it \
            --user $UID:$UID \
            --network host \
            --env DISPLAY=$DISPLAY \
+           --volume $HOME/Downloads:/home/winbox/downloads \
            --volume $HOME/.local/share/MikroTik/WinBox:/home/winbox/.local/share/MikroTik/WinBox \
            "$registry/$image_name:latest"
