@@ -4,7 +4,7 @@
 
 registry='ghcr.io/tagadvance'
 image_name='winbox'
-version=${1:-"4.2"}
+version=${1:-"4.3"}
 here=$(dirname "$(realpath $0)")
 
 docker buildx build --platform linux/amd64 \
